@@ -59,6 +59,8 @@ app.get('/images/:filename', (req, res) => {
 });
 
 // Escucha en el puerto 3000
-app.listen(3000, () => {
-    console.log('Servidor en http://localhost:3000');
+app.listen(3000, '0.0.0.0', () => {
+    console.log('Servidor en http://0.0.0.0:3000');
+    console.log('Sustituya "0.0.0.0" por la direccion de su equipo');
+    console.log('Presione CTRL+C para detener el servidor');
 });
