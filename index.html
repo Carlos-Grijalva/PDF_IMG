@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        #container {
+            height: 100vh;
+            background-color: rgb(85, 85, 85);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        img {
+            max-height: 100%;
+            max-width: 100%;
+            min-height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+    </style>
+
+    <div id="container"></div>
+
+    <script>
+        let datos = [];
+        let i = 0;
+        let intervaloFetch;
+
+        let traerDatos = async () => {
+            try {
+                let resp = await fetch('/api/images', { method: 'GET' });
+                let respData = await resp.json();
+                if (resp.ok) {
+                    return respData;
+                }
+            } catch (error) {
+                console.log("Error al traer datos:", error);
+            }
+        }
+
+        let init = async () => {
+            try {
+                datos = await traerDatos();
+                console.log("Datos iniciales:", datos);
+
+                // Cargar datos nuevos cada 5 segundos
+                intervaloFetch = setInterval(async () => {
+                    datos = await traerDatos();
+                    console.log("Datos actualizados:", datos);
+                }, 5000);
+
+                // Mostrar la primera imagen
+                mostrarDatos();
+            } catch (error) {
+                console.log(error);
+            }
+        }
+
+        let mostrarDatos = () => {
+            let container = document.getElementById('container');
+            container.innerHTML = '';
+
+            // Crear un nuevo elemento de imagen y configurar su carga
+            let img = document.createElement('img');
+            img.src = datos[i]?.url;
+
+            // Evento de carga de la imagen
+            img.onload = () => {
+                container.innerHTML = '';
+                container.appendChild(img);
+
+                // Configurar la siguiente imagen después de un retraso, o cuando esté lista
+                setTimeout(() => {
+                    i = (i + 1) % datos.length;
+                    mostrarDatos(); // Llamar de nuevo para cargar la siguiente imagen
+                }, 10000);
+            };
+
+            // En caso de error en la carga, intentar la siguiente imagen
+            img.onerror = () => {
+                console.log("Error al cargar la imagen:", img.src);
+                i = (i + 1) % datos.length;
+                mostrarDatos(); // Llamar de nuevo para intentar la siguiente
+            };
+        }
+
+        init();
+    </script>
+</body>
+</html>
