@@ -1,4 +1,4 @@
-# Este simple sistema permite mostrar documentos PDF con paginación automática a través de inernet.
+# Sistema simple que muestra documentos PDF con paginación automática a través de internet.
 
 ### Justificación:
 En ocasiones, una empresa requiere mostrar información actualizada como reportes, diapositivas o incluso hojas de cálculo en televisores o a través de cualquier computadora dentro de la intranet.
