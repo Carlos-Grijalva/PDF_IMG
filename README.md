@@ -1,6 +1,6 @@
-#Este simple sistema permite mostrar documentos PDF con paginación automática a través de inernet.
+# Este simple sistema permite mostrar documentos PDF con paginación automática a través de inernet.
 
-##Justificación
+### Justificación:
 En ocasiones, una empresa requiere mostrar información actualizada como reportes, diapositivas o incluso hojas de cálculo en televisores o a través de cualquier computadora dentro de la intranet.
 Lo común en estos escenarios es crear un video en formato compatible con un televisor agregando múltiples diapositivas a mostrar. Este enfoque no es óptimo para mostrar contenido actualizado a través de la intranet de la empresa.
 Pero, ¿qué sucede cuando hay múltiples departamentos?
